@@ -1,0 +1,518 @@
+fileFormatVersion: 2
+guid: 7207dc731eca83c409a6fd8b5f6516e8
+timeCreated: 1506248070
+licenseType: Free
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Bone001
+    100004: Bone002
+    100006: Bone003
+    100008: Bone004
+    100010: Bone005
+    100012: Bone006
+    100014: Bone007
+    100016: Bone008
+    100018: Bone009
+    100020: Bone013
+    100022: Bone014
+    100024: Bone015
+    100026: Bone016
+    100028: Bone017
+    100030: Bone018
+    100032: Bone019
+    100034: Bone020
+    100036: Bone021
+    100038: Bone022
+    100040: Bone023
+    100042: Bone024
+    100044: Bone025
+    100046: Bone026
+    100048: brazo_deracho001
+    100050: brazo_deracho002
+    100052: brazo_deracho003
+    100054: brazo_isquierdo001
+    100056: brazo_isquierdo002
+    100058: brazo_isquierdo003
+    100060: cabeza
+    100062: columna001
+    100064: columna002
+    100066: columna003
+    100068: columna004
+    100070: columna005
+    100072: columna006
+    100074: cuerpo
+    100076: manos
+    100078: ojo001
+    100080: ojo002
+    100082: ojos
+    100084: P_derecha001
+    100086: P_derecha002
+    100088: P_derecha003
+    100090: P_isquierda001
+    100092: P_isquierda002
+    100094: P_isquierda003
+    400000: //RootNode
+    400002: Bone001
+    400004: Bone002
+    400006: Bone003
+    400008: Bone004
+    400010: Bone005
+    400012: Bone006
+    400014: Bone007
+    400016: Bone008
+    400018: Bone009
+    400020: Bone013
+    400022: Bone014
+    400024: Bone015
+    400026: Bone016
+    400028: Bone017
+    400030: Bone018
+    400032: Bone019
+    400034: Bone020
+    400036: Bone021
+    400038: Bone022
+    400040: Bone023
+    400042: Bone024
+    400044: Bone025
+    400046: Bone026
+    400048: brazo_deracho001
+    400050: brazo_deracho002
+    400052: brazo_deracho003
+    400054: brazo_isquierdo001
+    400056: brazo_isquierdo002
+    400058: brazo_isquierdo003
+    400060: cabeza
+    400062: columna001
+    400064: columna002
+    400066: columna003
+    400068: columna004
+    400070: columna005
+    400072: columna006
+    400074: cuerpo
+    400076: manos
+    400078: ojo001
+    400080: ojo002
+    400082: ojos
+    400084: P_derecha001
+    400086: P_derecha002
+    400088: P_derecha003
+    400090: P_isquierda001
+    400092: P_isquierda002
+    400094: P_isquierda003
+    2300000: cabeza
+    2300002: cuerpo
+    3300000: cabeza
+    3300002: cuerpo
+    4300000: cabeza
+    4300002: ojos
+    4300004: manos
+    4300006: cuerpo
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: manos
+    13700002: ojos
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human:
+    - boneName: columna003
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Bone022
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Bone019
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: columna006
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Bone014
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Bone015
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Bone006
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Bone007
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Bone008
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Bone009
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Bone016
+      humanName: LeftEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: 001(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: cabeza
+      parentName: 001(Clone)
+      position: {x: -0, y: 2.4471793, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 2.54, y: 2.54, z: 2.54}
+    - name: columna003
+      parentName: 001(Clone)
+      position: {x: -0, y: 0, z: -1.5576352}
+      rotation: {x: -0.7928208, y: 0.010516938, z: -0.007793489, w: 0.6093142}
+      scale: {x: 3.0678484, y: 3.0678506, z: 3.067851}
+    - name: Bone002
+      parentName: columna003
+      position: {x: 5.9604643e-10, y: 0.03938198, z: 0.06303608}
+      rotation: {x: 0.67971534, y: 0.19490291, z: 0.6797153, w: 0.19490264}
+      scale: {x: 0.82794136, y: 0.82794136, z: 0.8279416}
+    - name: columna002
+      parentName: Bone002
+      position: {x: -0, y: -0.000000038146972, z: 0}
+      rotation: {x: 0.7010669, y: 0.08137935, z: 0.7043337, w: -0.076135166}
+      scale: {x: 1.2078149, y: 1.2078141, z: 1.2078142}
+    - name: Bone001
+      parentName: columna002
+      position: {x: -0.0019796896, y: 0.043444443, z: 0.09100078}
+      rotation: {x: 0.6814759, y: 0.15166976, z: 0.69771796, w: 0.16055077}
+      scale: {x: 0.8279412, y: 0.82794136, z: 0.82794124}
+    - name: columna001
+      parentName: Bone001
+      position: {x: -0.000000076293944, y: 0.000000019073486, z: -0.000000076293944}
+      rotation: {x: 0.68965584, y: 0.1561247, z: 0.6896557, w: -0.15612471}
+      scale: {x: 1.2078149, y: 1.2078155, z: 1.2078152}
+    - name: ojo001
+      parentName: columna001
+      position: {x: 0.020193504, y: 0.0027700423, z: -0.050113067}
+      rotation: {x: -0.6056923, y: 0.0000006536997, z: -0.0000003458344, w: 0.79569894}
+      scale: {x: 0.8279416, y: 0.82794166, z: 0.8279415}
+    - name: Bone025
+      parentName: ojo001
+      position: {x: 0.00000006198883, y: -0.00000045776366, z: -0.00000061035155}
+      rotation: {x: -0.05803641, y: 0.7047211, z: -0.058037348, w: 0.704721}
+      scale: {x: 1.0000008, y: 0.73081255, z: 0.52671754}
+    - name: ojo002
+      parentName: columna001
+      position: {x: -0.017493242, y: 0.0060048676, z: -0.050988197}
+      rotation: {x: -0.6001665, y: -0.0007871881, z: 0.004414817, w: 0.79986256}
+      scale: {x: 0.82796234, y: 0.8279851, z: 0.8279568}
+    - name: Bone026
+      parentName: ojo002
+      position: {x: -0.000000022649765, y: 0, z: -0.00000061035155}
+      rotation: {x: -0.7051815, y: 0.03339909, z: 0.7070284, w: -0.041405942}
+      scale: {x: 0.9999996, y: 0.70989174, z: 0.5078557}
+    - name: Bone003
+      parentName: columna003
+      position: {x: 0.0000000012852251, y: 0.000000114440915, z: -0.000000057220458}
+      rotation: {x: 0.6975716, y: 0.11573201, z: 0.6975716, w: 0.11573192}
+      scale: {x: 0.8279414, y: 0.82794136, z: 0.82794124}
+    - name: columna004
+      parentName: Bone003
+      position: {x: -0.14518078, y: -0.000000076293944, z: 2.4214386e-10}
+      rotation: {x: 0.69807, y: 0.11268726, z: 0.6980698, w: -0.11268729}
+      scale: {x: 1.2078149, y: 1.2078145, z: 1.2078145}
+    - name: Bone004
+      parentName: columna004
+      position: {x: -0.000000009536743, y: -0.00000019073485, z: 0.000000047683713}
+      rotation: {x: 0.70658827, y: -0.0270741, z: 0.7065883, w: -0.027073536}
+      scale: {x: 0.82794195, y: 0.82794213, z: 0.82794183}
+    - name: columna005
+      parentName: Bone004
+      position: {x: -0.113205716, y: 0.00018684387, z: 0.0000053474305}
+      rotation: {x: 0.7066404, y: -0.025717422, z: 0.70664036, w: 0.02563852}
+      scale: {x: 1.2078149, y: 1.2078149, z: 1.2078149}
+    - name: Bone005
+      parentName: columna005
+      position: {x: -0.000000009834766, y: 0.000000038146972, z: -0.0000001335144}
+      rotation: {x: 0.6857759, y: -0.17236997, z: 0.6857756, w: -0.17237143}
+      scale: {x: 0.82794124, y: 0.82794076, z: 0.8279413}
+    - name: columna006
+      parentName: Bone005
+      position: {x: -0.120997235, y: 0, z: -0.0000000756979}
+      rotation: {x: 0.076366164, y: -0.13959454, z: 0.97962564, w: 0.12253627}
+      scale: {x: 1.2078146, y: 1.2078146, z: 1.2078148}
+    - name: Bone006
+      parentName: columna006
+      position: {x: -0.00000004053116, y: -0.000000076293944, z: 0.00000022888183}
+      rotation: {x: -0.33312073, y: 0.5059858, z: 0.67183435, w: 0.42620128}
+      scale: {x: 0.82794154, y: 0.8279415, z: 0.8279423}
+    - name: P_derecha001
+      parentName: Bone006
+      position: {x: -0.07265051, y: 0.000000038146972, z: -0.000000114440915}
+      rotation: {x: -0.5244736, y: 0.65079397, z: -0.34506056, w: -0.42699867}
+      scale: {x: 1.0000001, y: 0.99999994, z: 1}
+    - name: Bone007
+      parentName: P_derecha001
+      position: {x: -0.000000114440915, y: 0.000000076293944, z: -0.000000095367426}
+      rotation: {x: -0.6648317, y: 0.6667653, z: 0.21905269, w: -0.25581017}
+      scale: {x: 1.0000008, y: 0.99999994, z: 1.0000002}
+    - name: P_derecha002
+      parentName: Bone007
+      position: {x: -0.2542533, y: -0.000000114440915, z: -0.000001335144}
+      rotation: {x: -0.30348605, y: 0.6224311, z: 0.6443883, w: -0.32440642}
+      scale: {x: 1.0000001, y: 1, z: 0.99999994}
+    - name: Bone008
+      parentName: P_derecha002
+      position: {x: -0.000000076293944, y: -0.000000114440915, z: 0.000000038146972}
+      rotation: {x: -0.31321928, y: 0.621811, z: 0.6346254, w: 0.3354035}
+      scale: {x: 0.99999946, y: 0.99999976, z: 1.0000001}
+    - name: P_derecha003
+      parentName: Bone008
+      position: {x: -0.26118696, y: 0.000000076293944, z: 0.00000082969666}
+      rotation: {x: 0.66986096, y: -0.18018758, z: -0.17732096, w: 0.6981232}
+      scale: {x: 1.0000001, y: 1.0000004, z: 1.0000001}
+    - name: Bone009
+      parentName: P_derecha003
+      position: {x: -0.0000002479553, y: -0.000000038146972, z: 0}
+      rotation: {x: -0.26436353, y: 0.64131796, z: 0.66201466, w: 0.28383058}
+      scale: {x: 1.0000005, y: 1.0000002, z: 0.9999999}
+    - name: Bone013
+      parentName: columna006
+      position: {x: 0.00000003695488, y: -0.000000038146972, z: 0.00000019073485}
+      rotation: {x: -0.59677964, y: -0.08228438, z: -0.10902047, w: 0.7906946}
+      scale: {x: 0.8279416, y: 0.8279416, z: 0.8279419}
+    - name: P_isquierda001
+      parentName: Bone013
+      position: {x: -0.07199457, y: -0.00000064849854, z: 0.0000009536743}
+      rotation: {x: -0.44993117, y: -0.5784574, z: -0.41707426, w: 0.5375854}
+      scale: {x: 0.99999875, y: 0.9999999, z: 0.9999987}
+    - name: Bone014
+      parentName: P_isquierda001
+      position: {x: -0.0000009918213, y: -0.0000004196167, z: 0.00000022888183}
+      rotation: {x: 0.5893175, y: 0.7162674, z: -0.33665967, w: -0.16225365}
+      scale: {x: 1.000002, y: 1.0000017, z: 1.0000001}
+    - name: P_isquierda002
+      parentName: Bone014
+      position: {x: -0.24196999, y: 0.0000008392334, z: -0.0000005245209}
+      rotation: {x: 0.3908834, y: 0.59913474, z: -0.5829286, w: -0.38528177}
+      scale: {x: 0.9999991, y: 1, z: 0.999999}
+    - name: Bone015
+      parentName: P_isquierda002
+      position: {x: -0.0000012969971, y: -0.0000009155273, z: 0.00000030517577}
+      rotation: {x: 0.60042316, y: 0.38937762, z: -0.38005155, w: 0.58603585}
+      scale: {x: 1.0000013, y: 1.0000014, z: 0.9999994}
+    - name: P_isquierda003
+      parentName: Bone015
+      position: {x: -0.27080965, y: 0.0000009918213, z: -0.0000009441375}
+      rotation: {x: -0.6764069, y: -0.23574972, z: 0.23153055, w: 0.6582472}
+      scale: {x: 0.99999803, y: 1, z: 0.99999917}
+    - name: Bone016
+      parentName: P_isquierda003
+      position: {x: -0.0000017166137, y: -0.0000009918213, z: -0.00000015258789}
+      rotation: {x: 0.2589361, y: 0.6671409, z: -0.65115523, w: 0.2527291}
+      scale: {x: 1.0000014, y: 1.000002, z: 1.0000006}
+    - name: Bone017
+      parentName: columna003
+      position: {x: -0.000000047720967, y: -0.000013809204, z: 0.0000008678436}
+      rotation: {x: 0.18283041, y: 0.5739924, z: 0.76052153, w: -0.24230734}
+      scale: {x: 0.8279414, y: 0.8279415, z: 0.8279414}
+    - name: brazo_deracho001
+      parentName: Bone017
+      position: {x: -0.13914977, y: -0.0000000667572, z: 0.00000019073485}
+      rotation: {x: 0.20657459, y: -0.44125056, z: 0.343966, w: 0.8026906}
+      scale: {x: 0.9999989, y: 1, z: 0.99999905}
+    - name: Bone019
+      parentName: brazo_deracho001
+      position: {x: -0.0000004196167, y: -0.000000009536743, z: -0.000000095367426}
+      rotation: {x: -0.5963079, y: 0.36418015, z: 0.37286475, w: 0.61054206}
+      scale: {x: 1.0000019, y: 1.0000014, z: 1.0000006}
+    - name: brazo_deracho002
+      parentName: Bone019
+      position: {x: -0.17567988, y: -0.000000038146972, z: -0.00000016212464}
+      rotation: {x: 0.64274347, y: -0.22452495, z: -0.18217902, w: 0.7094225}
+      scale: {x: 0.999999, y: 0.9999998, z: 0.999999}
+    - name: Bone020
+      parentName: brazo_deracho002
+      position: {x: -0.000000114440915, y: 0.00000022888183, z: 0.000000019073486}
+      rotation: {x: -0.3411383, y: 0.63840663, z: 0.6085369, w: 0.32518378}
+      scale: {x: 1.0000008, y: 1.0000004, z: 0.9999997}
+    - name: brazo_deracho003
+      parentName: Bone020
+      position: {x: -0.1652632, y: -0.00012211614, z: -0.0015871818}
+      rotation: {x: -0.40458623, y: 0.63893765, z: 0.5217915, w: -0.394718}
+      scale: {x: 1, y: 0.99999976, z: 0.9999992}
+    - name: Bone021
+      parentName: brazo_deracho003
+      position: {x: -0.000000076293944, y: -0.00000017166137, z: 0}
+      rotation: {x: -0.43058726, y: 0.562049, z: 0.565196, w: 0.42337814}
+      scale: {x: 1.0000005, y: 1.0000006, z: 1.0000011}
+    - name: Bone018
+      parentName: columna003
+      position: {x: 0.000000018980353, y: -0.000017433165, z: -0.000007419586}
+      rotation: {x: -0.5830729, y: -0.15141611, z: -0.20066994, w: 0.7725482}
+      scale: {x: 0.8279415, y: 0.82794124, z: 0.8279413}
+    - name: brazo_isquierdo001
+      parentName: Bone018
+      position: {x: -0.13647689, y: -0.0000044196845, z: 0.00000057220456}
+      rotation: {x: -0.3005119, y: -0.64995056, z: -0.28917792, w: 0.6353212}
+      scale: {x: 0.999999, y: 1.0000001, z: 1.0000001}
+    - name: Bone022
+      parentName: brazo_isquierdo001
+      position: {x: -0.00000061035155, y: -0.000000076293944, z: 0.000000038146972}
+      rotation: {x: 0.52238554, y: 0.40800247, z: -0.471725, w: 0.5814833}
+      scale: {x: 1.0000011, y: 1.000001, z: 1.0000012}
+    - name: brazo_isquierdo002
+      parentName: Bone022
+      position: {x: -0.18586841, y: 0.00000022888183, z: 0.0000014495849}
+      rotation: {x: -0.6495749, y: -0.17208397, z: 0.039755844, w: 0.7394992}
+      scale: {x: 1, y: 0.9999989, z: 0.999999}
+    - name: Bone023
+      parentName: brazo_isquierdo002
+      position: {x: -0.0000005340576, y: 0.00000034332274, z: 0.000000019073486}
+      rotation: {x: -0.31999484, y: -0.6025591, z: 0.64570594, w: -0.34291363}
+      scale: {x: 1.0000008, y: 1.0000007, z: 1.0000005}
+    - name: brazo_isquierdo003
+      parentName: Bone023
+      position: {x: -0.1641771, y: -0.0000022888182, z: 0.0000007343292}
+      rotation: {x: 0.39568737, y: 0.62218827, z: -0.511605, w: -0.44110507}
+      scale: {x: 0.9999998, y: 0.9999992, z: 0.99999934}
+    - name: Bone024
+      parentName: brazo_isquierdo003
+      position: {x: -0.0000004196167, y: -0.000000085830685, z: 0}
+      rotation: {x: 0.44420475, y: 0.61033773, z: -0.520882, w: 0.39856234}
+      scale: {x: 0.9999996, y: 0.99999994, z: 1.0000005}
+    - name: cuerpo
+      parentName: 001(Clone)
+      position: {x: -0, y: 2.4479167, z: -1.209136e-18}
+      rotation: {x: -0.7056011, y: 0, z: -0, w: 0.7086093}
+      scale: {x: 2.54, y: 2.54, z: 2.54}
+    - name: manos
+      parentName: 001(Clone)
+      position: {x: -0, y: 2.4479167, z: -1.209136e-18}
+      rotation: {x: -0.7056011, y: 0, z: -0, w: 0.7086093}
+      scale: {x: 2.54, y: 2.54, z: 2.54}
+    - name: ojos
+      parentName: 001(Clone)
+      position: {x: -0, y: 2.4471793, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 2.54, y: 2.54, z: 2.54}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
