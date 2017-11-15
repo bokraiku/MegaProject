@@ -96,11 +96,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 return;
             }
 
-            if (!m_Jump)
-            {
-                m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
-                //Debug.Log("Jump" + m_Jump);
-            }
+            //if (!m_Jump)
+            //{
+            //    m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+            //    //Debug.Log("Jump" + m_Jump);
+            //}
         }
 
 
