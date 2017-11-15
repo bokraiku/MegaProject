@@ -1,0 +1,23 @@
+[
+  {
+    "id": 0,
+    "title": "Normal Sword",
+    "value": 2,
+    "stack_able": true,
+    "slug": "silver_sworrd"
+  },
+  {
+    "id": 1,
+    "title": "Great Sword New",
+    "value": 9,
+    "stack_able": true,
+    "slug": "gold_sword"
+  },
+  {
+    "id": 2,
+    "title": "Great Sword Old",
+    "value": 112,
+    "stack_able": false,
+    "slug": "gold_sword" 
+  }
+]
