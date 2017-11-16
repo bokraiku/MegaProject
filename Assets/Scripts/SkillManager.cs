@@ -25,8 +25,8 @@ public class SkillManager : MonoBehaviour {
         {
             Instance = this;
         }
-        PlayerObj = GameObject.FindWithTag("Player");
-        Debug.Log("Player Object : " + PlayerObj);
+        //PlayerObj = GameObject.FindWithTag("Player");
+        //Debug.Log("Player Object : " + PlayerObj);
         //NormalAttack.GetComponent<Button>().onClick.AddListener(PlayerObj.GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter>().NormalAttack);
         //Skill1.GetComponent<Button>().onClick.AddListener(PlayerObj.GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter>().Skill1);
         //Skill2.GetComponent<Button>().onClick.AddListener(PlayerObj.GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter>().Skill2);

@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityStandardAssets.CrossPlatformInput;
+using System.Text.RegularExpressions;
 
 
 namespace UnityStandardAssets.Characters.ThirdPerson
@@ -25,6 +26,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Vector3 CameraVerocity = Vector3.zero;
         private float CameraDampTime = 0.15f;
         private float CameraSpeed = 2f;
+
+        private string bound_pattern = "(_bound)$";
+        private string warp_pattern = "(spawn_point)$";
+        private GameObject SkillPanel;
 
 
 
@@ -51,6 +56,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         void Awake()
         {
+            SkillPanel = GameObject.FindWithTag("SkillPanel");
             //CameraBase = GameObject.FindWithTag("CameraBase");
             //CameraBase.SetActive(false);
         }
@@ -96,11 +102,55 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 return;
             }
 
+
+            if(GameManagement.instane != null)
+            {
+                GameManagement.instane.DeActivateZone();
+            }
+
+
             //if (!m_Jump)
             //{
             //    m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             //    //Debug.Log("Jump" + m_Jump);
             //}
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            
+            if(other != null)
+            {
+                //Debug.Log("Current Game Object  " + other.gameObject.name);
+                GameObject currentGameobject = other.gameObject;
+                Regex objectMatch = new Regex(this.bound_pattern);
+                Regex warpMatch = new Regex(this.warp_pattern);
+                if (objectMatch.IsMatch(currentGameobject.name.ToString()) &&  GameManagement.instane != null)
+                {
+                    GameManagement.instane.LocalPlayerCurrentZone = currentGameobject;
+                    if (currentGameobject.name != "g_z1_bound")
+                    {
+                        SkillPanel.SetActive(true);
+                    }
+                    else
+                    {
+                        SkillPanel.SetActive(false);
+                    }
+                    Debug.Log("Current Game Object  " + currentGameobject.name);
+                }
+
+                if (warpMatch.IsMatch(currentGameobject.name.ToString()) && GameManagement.instane != null)
+                {
+                    Debug.Log("Current Warp  " + currentGameobject.name);
+                    GameObject WarpObject =  GameManagement.instane.ManageWarp(currentGameobject.name);
+                    if(WarpObject != null)
+                    {
+                        this.transform.position = WarpObject.transform.position;
+                    }
+                }
+
+            }
+
         }
 
 
