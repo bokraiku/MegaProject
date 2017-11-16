@@ -5,6 +5,7 @@ public class EnemySpawner : NetworkBehaviour
 {
 
     public GameObject enemyPrefab;
+    public Transform enemySpawnPoint;
     public int numberOfEnemies;
 
     public override void OnStartServer()
@@ -12,9 +13,9 @@ public class EnemySpawner : NetworkBehaviour
         for (int i = 0; i < numberOfEnemies; i++)
         {
             var spawnPosition = new Vector3(
-                Random.Range(-8.0f, 8.0f),
+                Random.Range((enemySpawnPoint.position.x - 20), enemySpawnPoint.position.x),
                 0.0f,
-                Random.Range(-8.0f, 8.0f));
+                Random.Range((enemySpawnPoint.position.z - 20), enemySpawnPoint.position.z));
 
             var spawnRotation = Quaternion.Euler(
                 0.0f,

@@ -386,7 +386,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if(this.normalTimer == 0 && this.is_attack == false)
             {
                 this.is_attack = true;
-                m_Animator.SetTrigger("PunchTrigger");
+                
+                GetComponent<NetworkAnimator>().SetTrigger("PunchTrigger");
                 this.normalTimer = this.normalAttackCooldown;
             }
 
@@ -405,7 +406,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 setSkillCoolDown(0);
                
                 this.is_attack = true;
-                m_Animator.SetTrigger("Skill1");
+                
+                GetComponent<NetworkAnimator>().SetTrigger("Skill1");
                 this.skill1Timer = this.skill1Cooldown;
 
             }
@@ -424,7 +426,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 setSkillCoolDown(1);
                 this.is_attack = true;
-                m_Animator.SetTrigger("Skill2");
+                GetComponent<NetworkAnimator>().SetTrigger("Skill2");
                 this.skill2Timer = this.skill2Cooldown;
 
             }
@@ -444,7 +446,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 setSkillCoolDown(2);
                 this.is_attack = true;
                 //this.hit.SetActive(true);
-                m_Animator.SetTrigger("Skill3");
+                GetComponent<NetworkAnimator>().SetTrigger("Skill3");
                 this.skill3Timer = this.skill3Cooldown;
                 
             }
@@ -463,7 +465,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
                 setSkillCoolDown(3);
                 this.is_attack = true;
-                m_Animator.SetTrigger("Skill4");
+                GetComponent<NetworkAnimator>().SetTrigger("Skill4");
                 this.skill4Timer = this.skill4Cooldown;
 
             }

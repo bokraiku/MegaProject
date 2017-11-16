@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222507454793977342}
   - component: {fileID: 114422993979226368}
   - component: {fileID: 114029606917163750}
+  - component: {fileID: 114344595055857164}
   m_Layer: 9
   m_Name: SkillPanel
   m_TagString: SkillPanel
@@ -641,6 +642,26 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114344595055857164
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1106370458393182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f85f35eeee56f04ba49808163da5607, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NormalAttack: {fileID: 1148549774765084}
+  Skill1: {fileID: 1151555724470826}
+  Skill2: {fileID: 1451539162640794}
+  Skill3: {fileID: 1338963735210724}
+  Skill4: {fileID: 1697862971259280}
+  CoolDown1: {fileID: 1893432436975772}
+  CoolDown2: {fileID: 1339926460004918}
+  CoolDown3: {fileID: 1693095512620772}
+  CoolDown4: {fileID: 1495613847262060}
 --- !u!114 &114366911555191518
 MonoBehaviour:
   m_ObjectHideFlags: 1
