@@ -7,6 +7,7 @@ public class EnemySpawner : NetworkBehaviour
     public GameObject enemyPrefab;
     public Transform enemySpawnPoint;
     public int numberOfEnemies;
+    public int counter;
 
     public override void OnStartServer()
     {
@@ -24,6 +25,7 @@ public class EnemySpawner : NetworkBehaviour
 
             var enemy = (GameObject)Instantiate(enemyPrefab, spawnPosition, spawnRotation);
             NetworkServer.Spawn(enemy);
+            enemy.GetComponent<MonsterID>().UniquieMonsterID = "Monster1_ " + i;
         }
     }
 }

@@ -14858,6 +14858,11 @@ Prefab:
       propertyPath: enemySpawnPoint
       value: 
       objectReference: {fileID: 242009172}
+    - target: {fileID: 114017920515779240, guid: cf67cc67328982647945332a349cbedb,
+        type: 2}
+      propertyPath: numberOfEnemies
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cf67cc67328982647945332a349cbedb, type: 2}
   m_IsPrefabParent: 0
@@ -16285,7 +16290,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4326996422645042, guid: 8bd5297a25fbb4749910086ec9eccb53, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 349.5
+      value: 222.1
       objectReference: {fileID: 0}
     - target: {fileID: 4326996422645042, guid: 8bd5297a25fbb4749910086ec9eccb53, type: 2}
       propertyPath: m_LocalPosition.y
@@ -16293,7 +16298,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4326996422645042, guid: 8bd5297a25fbb4749910086ec9eccb53, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 123
+      value: 103.85
       objectReference: {fileID: 0}
     - target: {fileID: 4326996422645042, guid: 8bd5297a25fbb4749910086ec9eccb53, type: 2}
       propertyPath: m_LocalRotation.x

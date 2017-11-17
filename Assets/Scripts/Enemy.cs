@@ -33,19 +33,28 @@ public class Enemy : NetworkBehaviour {
     private float speed = 3f;
 
     private Transform myTransform;
-    private Transform targetTransform;
+
+
+    public Transform targetTransform;
     private NavMeshAgent agent;
 
     public Transform Player;
     private Vector3  originalPosition;
 
+    private float currentDistance;
+    private float minDistance = 2f;
+    private float nextAttack;
+    private float attackRate = 3f;
+
+    int layerMask;
     private bool isReturn = false;
     private void Awake()
     {
         originalPosition = new Vector3(transform.position.x,transform.position.y, transform.position.z);
     }
     void Start () {
-        
+
+        DiableMarker();
         FloatingController.Initialize();
         //damageSpawn = GameObject.Find("DamageSpawn");
         anim = GetComponent<Animator>();
@@ -55,59 +64,102 @@ public class Enemy : NetworkBehaviour {
 
         agent = GetComponent<NavMeshAgent>();
         myTransform = transform;
-        raycastLayer = 1<<LayerMask.NameToLayer("Player");
+        raycastLayer = 1 << LayerMask.GetMask("Player");
+        //raycastLayer = ~raycastLayer;
+        //layerMask = 1 << 6;
+        Debug.Log("Layer Start : " + raycastLayer.value);
 
-        
-
+        if (isServer)
+        {
+            StartCoroutine(DoCheck());
+            
+        }
+       
 
     }
 
     private void FixedUpdate()
     {
         
-        SearchTarget();
-        MoveToTarget();
+        //SearchTarget();
+        //MoveToTarget();
 
-        ReturnToOri();
+        //ReturnToOri();
         //CheckOri();
     }
     void ReturnToOri()
     {
+        if (!isServer)
+        {
+            return;
+        }
         if (targetTransform != null)
         {
             float distance = Vector3.Distance(transform.position, targetTransform.position);
 
             if (distance >= 18f)
             {
+                anim.SetBool("IsWalk", true);
                 isReturn = true;
                 targetTransform = null;
                 //Debug.Log("Distnace : " + distance);
                 agent.isStopped = true;
                 agent.ResetPath();
                 //Debug.Log("ori : " + originalPosition.position);
-                float step = speed * Time.deltaTime;
+                //float step = speed * Time.deltaTime;
                 //transform.position = Vector3.MoveTowards(transform.position, originalPosition, step);
                 //agent.SetDestination(originalPosition);
                 agent.destination = originalPosition;
+                Debug.Log("REturn to origin 1");
 
             }
+        }
+
+        if(targetTransform == null && Vector3.Distance(transform.position, originalPosition) > 0.5f)
+        {
+            anim.SetBool("IsWalk", true);
+            isReturn = true;
+            targetTransform = null;
+            //Debug.Log("Distnace : " + distance);
+            agent.isStopped = true;
+            agent.ResetPath();
+            //Debug.Log("ori : " + originalPosition.position);
+            //float step = speed * Time.deltaTime;
+            //transform.position = Vector3.MoveTowards(transform.position, originalPosition, step);
+            //agent.SetDestination(originalPosition);
+            agent.destination = originalPosition;
+            Debug.Log("REturn to origin 2");
         }
     }
     void CheckOri()
     {
-        if (isReturn)
+        if (!isServer)
         {
-            float distance = Vector3.Distance(transform.position, originalPosition);
-            Debug.Log("TO origin : " + distance);
-            if (distance <= 0.5f)
-            {
-                isReturn = false;
-                agent.isStopped = true;
-                agent.ResetPath();
-                anim.SetBool("IsWalk", false);
-
-            }
+            return;
         }
+
+        float distance = Vector3.Distance(transform.position, originalPosition);
+
+        if(distance <= 2f)
+        {
+            Debug.Log("Arived to origin");
+            anim.SetBool("IsWalk", false);
+            isReturn = false;
+        }
+
+        //if (!agent.pathPending && isReturn)
+        //{
+        //    if (agent.remainingDistance <= agent.stoppingDistance)
+        //    {
+                
+        //        if (!agent.hasPath || agent.velocity.sqrMagnitude <= 2.5f)
+        //        {
+        //                Debug.Log("Arived to origin");
+        //                anim.SetBool("IsWalk", false);
+        //                isReturn = false;
+        //        }
+        //    }
+        //}
 
     }
     void SearchTarget()
@@ -118,18 +170,43 @@ public class Enemy : NetworkBehaviour {
         }
         if(targetTransform == null)
         {
-            Collider[] hitCollider = Physics.OverlapSphere(myTransform.position, radius, raycastLayer);
+            Collider[] hitCollider = Physics.OverlapSphere(myTransform.position, radius, LayerMask.GetMask("Player"));
             if(hitCollider.Length > 0)
             {
-                Debug.Log("Target : " + hitCollider[0].gameObject.name);
-                int randomRange = Random.Range(0, hitCollider.Length - 1);
-                targetTransform = hitCollider[randomRange].transform;
+                
+                foreach (Collider c in hitCollider)
+                {
+                   
+                    
+                    if (c.transform.name == "HitPoint")
+                    {
+                        continue;
+                    }else {
+                        targetTransform = c.transform;
+                        Debug.Log("Layer : " + c.name);
+                        break;
+                        
+                    }
+                    
+                }
             }
             else
             {
                 targetTransform = null;
             }
-            
+           
+            //if(hitCollider.Length > 0)
+            //{
+
+            //    int randomRange = Random.Range(0, hitCollider.Length);
+            //    Debug.Log("Target : " + hitCollider[randomRange].gameObject.name);
+            //    targetTransform = hitCollider[randomRange].transform;
+            //}
+            //else
+            //{
+            //    targetTransform = null;
+            //}
+
         }
 
         
@@ -156,6 +233,17 @@ public class Enemy : NetworkBehaviour {
     {
         agent.SetDestination(dest.position);
     }
+
+    IEnumerator DoCheck()
+    {
+        for (;;)
+        {
+            SearchTarget();
+            MoveToTarget();
+            yield return new WaitForSeconds(0.2f);
+        }
+    }
+
 
     // Update is called once per frame
     void Update () {
@@ -233,8 +321,8 @@ public class Enemy : NetworkBehaviour {
 
     public void TakeDamage(float damage)
     {
-        m_audio.PlayOneShot(m_clip[0], 0.5f);
-        GetComponent<NetworkAnimator>().SetTrigger("Hit");
+        //m_audio.PlayOneShot(m_clip[0], 0.5f);
+        //GetComponent<NetworkAnimator>().SetTrigger("Hit");
 
         amountHp -= damage;
         float fill = (1 / maxHp) * amountHp;
@@ -244,6 +332,7 @@ public class Enemy : NetworkBehaviour {
         if(amountHp <= 0)
         {
             GetComponent<NetworkAnimator>().SetTrigger("IsDeath");
+            //anim.SetTrigger("IsDeath");
             gameObject.layer = 1;
             gameObject.GetComponent<Collider>().isTrigger = true;
             gameObject.GetComponent<Enemy>().enabled = false;

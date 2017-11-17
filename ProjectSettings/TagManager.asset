@@ -24,9 +24,9 @@ TagManager:
   - UI
   - 
   - 
-  - HitBox
-  - Background
   - Player
+  - Background
+  - HitBox
   - DamageText
   - 
   - 

@@ -483,7 +483,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private void LunchAttack(Collider col)
         {
             Collider[] cols = Physics.OverlapBox(col.bounds.center, col.bounds.extents, col.transform.rotation, LayerMask.GetMask("HitBox"));
-            Debug.Log(cols.Length);
+            //Debug.Log(cols.Length);
             
             foreach(Collider c in cols){
                 if (c.transform.root == transform)
@@ -491,9 +491,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     continue;
                 }
                 //Debug.Log(c.name);
-                float damate = Mathf.Floor(Random.Range(playerStatus.P_ATTACK, playerStatus.P_ATTACK));
+                string uniqueID = c.transform.name;
+                
+                float damage = Mathf.Floor(Random.Range(playerStatus.P_ATTACK, playerStatus.P_ATTACK));
+                CmdTellServerMonsterWasAttack(uniqueID, damage);
                 //c.transform.GetComponent<Enemy>().TakeDamage(damate);
-                c.SendMessageUpwards("TakeDamage", damate);
+                //c.SendMessageUpwards("TakeDamage", damate);
                 
             }
         }
@@ -590,6 +593,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             
 
 
+        }
+
+        [Command]
+        void CmdTellServerMonsterWasAttack(string uniqueID,float damage)
+        {
+            GameObject go = GameObject.Find(uniqueID);
+            go.GetComponent<Enemy>().TakeDamage(damage);
         }
 
         public void EnableMarker()
