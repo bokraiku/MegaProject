@@ -482,6 +482,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void LunchAttack(Collider col)
         {
+            // MOnster
             Collider[] cols = Physics.OverlapBox(col.bounds.center, col.bounds.extents, col.transform.rotation, LayerMask.GetMask("HitBox"));
             //Debug.Log(cols.Length);
             
@@ -497,7 +498,25 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 CmdTellServerMonsterWasAttack(uniqueID, damage);
                 //c.transform.GetComponent<Enemy>().TakeDamage(damate);
                 //c.SendMessageUpwards("TakeDamage", damate);
+            }
+
+            Collider[] cols_player = Physics.OverlapBox(col.bounds.center, col.bounds.extents, col.transform.rotation, LayerMask.GetMask("Player"));
+            //Debug.Log(cols.Length);
+
+            foreach (Collider c in cols_player)
+            {
                 
+                if (c.transform.root == transform || c.transform.name == "HitPoint")
+                {
+                    continue;
+                }
+                Debug.Log("Found Player" + c.transform.name);
+                string uniqueID = c.transform.name;
+                //Debug.Log("Found Player" + uniqueID);
+                float damage = Mathf.Floor(Random.Range(playerStatus.P_ATTACK, playerStatus.P_ATTACK));
+                CmdTellServerWhoWasAttack(uniqueID, damage);
+                //c.transform.GetComponent<Enemy>().TakeDamage(damate);
+                //c.SendMessageUpwards("TakeDamage", damate);
             }
         }
 
@@ -600,6 +619,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             GameObject go = GameObject.Find(uniqueID);
             go.GetComponent<Enemy>().TakeDamage(damage);
+        }
+
+        [Command]
+        void CmdTellServerWhoWasAttack(string uniqueID, float damage)
+        {
+            GameObject go = GameObject.Find(uniqueID);
+            go.GetComponent<PlayerHealthManager>().TakeDamage(damage);
         }
 
         public void EnableMarker()

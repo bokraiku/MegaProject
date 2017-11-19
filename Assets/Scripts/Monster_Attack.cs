@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-
+using UnityEngine.AI;
 public class Monster_Attack : NetworkBehaviour
 {
 
@@ -13,17 +13,21 @@ public class Monster_Attack : NetworkBehaviour
     private float attackRate = 3f;
     private Transform myTransform;
     private Enemy targetScript;
+    private Animator anim;
+    private NavMeshAgent agent;
 
     // Use this for initialization
     void Start () {
         myTransform = transform;
         targetScript = GetComponent<Enemy>();
-
-        if (isServer)
-        {
-            StartCoroutine(IAttack());
-        }
-	}
+        anim = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
+        //if (isServer)
+        //{
+        //    StartCoroutine(IAttack());
+        //}
+        StartCoroutine(IAttack());
+    }
 
     void CheckIfTargetInRanger()
     {
@@ -33,9 +37,15 @@ public class Monster_Attack : NetworkBehaviour
             if (currentDistance < minDistance && Time.time > nextAttack)
             {
                 nextAttack = Time.time + attackRate;
-                GetComponent<NetworkAnimator>().SetTrigger("IsAttack");
-                //Debug.Log("Target : " + targetScript.transform.name);
-                targetScript.transform.GetComponent<PlayerHealthManager>().TakeDamage(this.Attack());
+                agent.isStopped = true;
+                agent.ResetPath();
+                //anim.SetBool("IsWalk", false);
+                anim.SetTrigger("IsAttack");
+
+                //GetComponent<NetworkAnimator>().SetTrigger("IsAttack");
+                Debug.Log("Target MOnster: " + targetScript.targetTransform.transform.name);
+                targetScript.targetTransform.transform.GetComponent<PlayerHealthManager>().TakeDamage(this.Attack());
+                //targetScript.transform.GetComponent<PlayerHealthManager>().TakeDamage(this.Attack());
             }
         }
     }

@@ -67,7 +67,7 @@ public class GameManagement : MonoBehaviour {
     {
         if (GameManagement.instane.LocalPlayerCurrentZone != null)
         {
-            Debug.Log("Game Manager : " + GameManagement.instane.LocalPlayerCurrentZone.name);
+            //Debug.Log("Game Manager : " + GameManagement.instane.LocalPlayerCurrentZone.name);
             for (int i = 0; i < worldZone.Length; i++)
             {
 

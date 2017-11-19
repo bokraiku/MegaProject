@@ -127,21 +127,25 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 Regex warpMatch = new Regex(this.warp_pattern);
                 if (objectMatch.IsMatch(currentGameobject.name.ToString()) &&  GameManagement.instane != null)
                 {
-                    GameManagement.instane.LocalPlayerCurrentZone = currentGameobject;
-                    if (currentGameobject.name != "g_z1_bound")
+                    if (isLocalPlayer)
                     {
-                        SkillPanel.SetActive(true);
+                        GameManagement.instane.LocalPlayerCurrentZone = currentGameobject;
+                        if (currentGameobject.name != "g_z1_bound")
+                        {
+                            //SkillPanel.SetActive(true);
+                        }
+                        else
+                        {
+                            //SkillPanel.SetActive(false);
+                        }
                     }
-                    else
-                    {
-                        SkillPanel.SetActive(false);
-                    }
-                    Debug.Log("Current Game Object  " + currentGameobject.name);
+                    
+                    //Debug.Log("Current Game Object  " + currentGameobject.name);
                 }
 
                 if (warpMatch.IsMatch(currentGameobject.name.ToString()) && GameManagement.instane != null)
                 {
-                    Debug.Log("Current Warp  " + currentGameobject.name);
+                    //Debug.Log("Current Warp  " + currentGameobject.name);
                     GameObject WarpObject =  GameManagement.instane.ManageWarp(currentGameobject.name);
                     if(WarpObject != null)
                     {

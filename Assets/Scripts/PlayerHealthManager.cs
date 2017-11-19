@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
-public class PlayerHealthManager : MonoBehaviour {
+public class PlayerHealthManager : NetworkBehaviour {
 
     public Image PlayerHealth;
     public GameObject damageSpawn;
 
-
+    [SyncVar]
     private float MaxHealth;
+
+    [SyncVar(hook = "OnHealthChanged")]
     private float HealthAmount;
 
     public PlayerStatus playerStatus;
@@ -39,29 +42,54 @@ public class PlayerHealthManager : MonoBehaviour {
 	}
     public void SetHealth(int health)
     {
-        this.MaxHealth = health;
-        this.HealthAmount = this.MaxHealth;
+        if (isLocalPlayer)
+        {
+            this.MaxHealth = health;
+            this.HealthAmount = this.MaxHealth;
+        }
+
     }
 
     public void TakeDamage(float Damage)
     {
-        if(HealthAmount > 0)
+        HealthAmount -= Damage;
+        Debug.Log("Take Damage : " + Damage);
+        FloatingController.CreateFloatingText(Damage.ToString(), damageSpawn.transform);
+        //if (isLocalPlayer)
+        //{
+        //    if (HealthAmount > 0)
+        //    {
+        //        FloatingController.CreateFloatingText(Damage.ToString(), damageSpawn.transform);
+        //        //m_source.PlayOneShot(m_audio[0], 0.5f);
+        //        //m_anim.SetTrigger("Impact");
+
+        //        float fill = (1 / MaxHealth) * HealthAmount;
+        //        PlayerHealth.fillAmount = fill;
+        //        Debug.Log("Take Damage : " + Damage);
+        //    }
+
+
+        //    if (HealthAmount <= 0 && this.isDead == false)
+        //    {
+        //        this.isDead = true;
+        //        Death();
+        //    }
+        //}
+
+    }
+    void SetHealthText() {
+        if (isLocalPlayer)
         {
-            FloatingController.CreateFloatingText(Damage.ToString(), damageSpawn.transform);
-            //m_source.PlayOneShot(m_audio[0], 0.5f);
-            //m_anim.SetTrigger("Impact");
-            HealthAmount -= Damage;
+
             float fill = (1 / MaxHealth) * HealthAmount;
             PlayerHealth.fillAmount = fill;
-            Debug.Log("Take Damage : " + Damage);
+            
         }
-
-
-        if(HealthAmount <= 0 && this.isDead == false)
-        {
-            this.isDead = true;
-            Death();
-        }
+    }
+    void OnHealthChanged(float hlth)
+    {
+        HealthAmount = hlth;
+        SetHealthText();
     }
 
     private void Death()

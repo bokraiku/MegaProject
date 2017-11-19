@@ -45,6 +45,8 @@ public class Enemy : NetworkBehaviour {
     private float minDistance = 2f;
     private float nextAttack;
     private float attackRate = 3f;
+    private float maxDistanceToLeave = 18f;
+    private float moveSpeed = 0f;
 
     int layerMask;
     private bool isReturn = false;
@@ -89,17 +91,14 @@ public class Enemy : NetworkBehaviour {
     }
     void ReturnToOri()
     {
-        if (!isServer)
-        {
-            return;
-        }
+
         if (targetTransform != null)
         {
-            float distance = Vector3.Distance(transform.position, targetTransform.position);
+            float distance = Vector3.Distance(targetTransform.position,transform.position);
 
-            if (distance >= 18f)
+            if (distance >= maxDistanceToLeave)
             {
-                anim.SetBool("IsWalk", true);
+                //anim.SetBool("IsWalk", true);
                 isReturn = true;
                 targetTransform = null;
                 //Debug.Log("Distnace : " + distance);
@@ -115,9 +114,9 @@ public class Enemy : NetworkBehaviour {
             }
         }
 
-        if(targetTransform == null && Vector3.Distance(transform.position, originalPosition) > 0.5f)
+        if (targetTransform == null && Vector3.Distance(transform.position, originalPosition) > 0.5f)
         {
-            anim.SetBool("IsWalk", true);
+            //anim.SetBool("IsWalk", true);
             isReturn = true;
             targetTransform = null;
             //Debug.Log("Distnace : " + distance);
@@ -128,22 +127,19 @@ public class Enemy : NetworkBehaviour {
             //transform.position = Vector3.MoveTowards(transform.position, originalPosition, step);
             //agent.SetDestination(originalPosition);
             agent.destination = originalPosition;
-            Debug.Log("REturn to origin 2");
+            //Debug.Log("REturn to origin 2");
         }
     }
     void CheckOri()
     {
-        if (!isServer)
-        {
-            return;
-        }
 
-        float distance = Vector3.Distance(transform.position, originalPosition);
 
-        if(distance <= 2f)
+        float distance = Vector3.Distance(originalPosition,transform.position);
+
+        if(distance <= 0.5f)
         {
-            Debug.Log("Arived to origin");
-            anim.SetBool("IsWalk", false);
+           // Debug.Log("Arived to origin");
+            //anim.SetBool("IsWalk", false);
             isReturn = false;
         }
 
@@ -164,10 +160,7 @@ public class Enemy : NetworkBehaviour {
     }
     void SearchTarget()
     {
-        if (!isServer)
-        {
-            return;
-        }
+
         if(targetTransform == null)
         {
             Collider[] hitCollider = Physics.OverlapSphere(myTransform.position, radius, LayerMask.GetMask("Player"));
@@ -182,6 +175,7 @@ public class Enemy : NetworkBehaviour {
                     {
                         continue;
                     }else {
+                       
                         targetTransform = c.transform;
                         Debug.Log("Layer : " + c.name);
                         break;
@@ -218,7 +212,7 @@ public class Enemy : NetworkBehaviour {
     {
         if(targetTransform != null && isServer)
         {
-            anim.SetBool("IsWalk", true);
+            
             //Debug.Log("Monster Moving ");
             SetNavDestination(targetTransform);
         }
@@ -231,7 +225,13 @@ public class Enemy : NetworkBehaviour {
     }
     void SetNavDestination(Transform dest)
     {
+        
         agent.SetDestination(dest.position);
+    }
+    void PlayAnimationMove()
+    {
+        moveSpeed = agent.velocity.magnitude;
+        anim.SetFloat("Forward", moveSpeed);
     }
 
     IEnumerator DoCheck()
@@ -240,6 +240,9 @@ public class Enemy : NetworkBehaviour {
         {
             SearchTarget();
             MoveToTarget();
+            ReturnToOri();
+            CheckOri();
+            PlayAnimationMove();
             yield return new WaitForSeconds(0.2f);
         }
     }

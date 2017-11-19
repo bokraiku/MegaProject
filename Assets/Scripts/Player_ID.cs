@@ -11,8 +11,7 @@ public class Player_ID : NetworkBehaviour {
     private Transform myTransform;
     public override void OnStartLocalPlayer()
     {
-        base.OnStartLocalPlayer();
-
+      
         GetNetidentity();
         Setidentity();
     }
@@ -37,6 +36,7 @@ public class Player_ID : NetworkBehaviour {
         CmdTellServerMyIdentity(MakeUniqueIdentity());
     }
 
+    [Client]
     void Setidentity()
     {
         if (!isLocalPlayer)
@@ -52,9 +52,11 @@ public class Player_ID : NetworkBehaviour {
 
     string MakeUniqueIdentity()
     {
-        string uniqueName = "Player" + playerNetID.ToString();
+        string uniqueName = "Player " + playerNetID.ToString();
+        Debug.Log("Unique Name : " + uniqueName);
         return uniqueName;
     }
+
 
     [Command]
     void CmdTellServerMyIdentity(string name)
