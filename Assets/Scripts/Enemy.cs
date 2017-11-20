@@ -161,32 +161,37 @@ public class Enemy : NetworkBehaviour {
     void SearchTarget()
     {
 
-        if(targetTransform == null)
+        if (targetTransform == null)
         {
             Collider[] hitCollider = Physics.OverlapSphere(myTransform.position, radius, LayerMask.GetMask("Player"));
-            if(hitCollider.Length > 0)
+            if (hitCollider.Length > 0)
             {
-                
+
                 foreach (Collider c in hitCollider)
                 {
-                   
-                    
+
+
                     if (c.transform.name == "HitPoint")
                     {
                         continue;
-                    }else {
-                       
+                    } else {
+
                         targetTransform = c.transform;
                         Debug.Log("Layer : " + c.name);
                         break;
-                        
+
                     }
-                    
+
                 }
             }
             else
             {
                 targetTransform = null;
+            }
+
+            if (targetTransform == null)
+            {
+                Debug.Log(transform.name + " target null");
             }
            
             //if(hitCollider.Length > 0)

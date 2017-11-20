@@ -101,12 +101,14 @@ public class PlayerHealthManager : NetworkBehaviour {
         
         HealthAmount = hlth;
         SetHealthText();
-        FloatingController.CreateFloatingText(DamageHit.ToString(), damageSpawn.transform);
-        DamageHit = 0;
+        
+       
     }
     void OnDamageHit(float damage)
     {
         DamageHit = damage;
+        FloatingController.CreateFloatingText(DamageHit.ToString(), damageSpawn.transform);
+        DamageHit = 0;
     }
 
     private void Death()

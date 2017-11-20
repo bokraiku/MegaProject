@@ -22,11 +22,11 @@ public class Monster_Attack : NetworkBehaviour
         targetScript = GetComponent<Enemy>();
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
-        //if (isServer)
-        //{
-        //    StartCoroutine(IAttack());
-        //}
-        StartCoroutine(IAttack());
+        if (isServer)
+        {
+            StartCoroutine(IAttack());
+        }
+        //StartCoroutine(IAttack());
     }
 
     void CheckIfTargetInRanger()
@@ -40,14 +40,28 @@ public class Monster_Attack : NetworkBehaviour
                 agent.isStopped = true;
                 agent.ResetPath();
                 //anim.SetBool("IsWalk", false);
-                anim.SetTrigger("IsAttack");
+                //anim.SetTrigger("IsAttack");
 
                 //GetComponent<NetworkAnimator>().SetTrigger("IsAttack");
                 Debug.Log("Target MOnster: " + targetScript.targetTransform.transform.name);
+                
                 targetScript.targetTransform.transform.GetComponent<PlayerHealthManager>().TakeDamage(this.Attack());
-                //targetScript.transform.GetComponent<PlayerHealthManager>().TakeDamage(this.Attack());
+                //MonsterAttack();
+                RpcMonsterPlayAnimation();
             }
         }
+    }
+    void MonsterAttack()
+    {
+        transform.LookAt(targetScript.targetTransform.transform);
+        anim.SetTrigger("IsAttack");
+
+    }
+
+    [ClientRpc]
+    void RpcMonsterPlayAnimation()
+    {
+        MonsterAttack();
     }
     IEnumerator IAttack()
     {
@@ -60,7 +74,7 @@ public class Monster_Attack : NetworkBehaviour
     public float Attack()
     {
 
-        float damage = Mathf.Floor(Random.Range(200, 500));
+        float damage = Mathf.Floor(Random.Range(10, 50));
         return damage;
     }
 }
