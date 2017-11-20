@@ -25,7 +25,7 @@ public class EnemySpawner : NetworkBehaviour
 
             var enemy = (GameObject)Instantiate(enemyPrefab, spawnPosition, spawnRotation);
             NetworkServer.Spawn(enemy);
-            enemy.GetComponent<MonsterID>().UniquieMonsterID = "Monster1_ " + i;
+            enemy.GetComponent<MonsterID>().UniquieMonsterID = "Monster1_" + i;
         }
     }
 }

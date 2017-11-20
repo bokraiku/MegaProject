@@ -305,21 +305,21 @@ public class Enemy : NetworkBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
-        {
+        //if(other.tag == "Player")
+        //{
            
-            //other.GetComponent<>s
-            PlayerHealthManager PlayerObject = other.gameObject.GetComponent<PlayerHealthManager>();
-            if (!PlayerObject.isDead)
-            {
-                PlayerObject.TakeDamage(Attack());
-            }
-            else
-            {
-                noTarget = true;
-            }
+        //    //other.GetComponent<>s
+        //    PlayerHealthManager PlayerObject = other.gameObject.GetComponent<PlayerHealthManager>();
+        //    if (!PlayerObject.isDead)
+        //    {
+        //        PlayerObject.TakeDamage(Attack());
+        //    }
+        //    else
+        //    {
+        //        noTarget = true;
+        //    }
             
-        }
+        //}
     }
 
     public void TakeDamage(float damage)

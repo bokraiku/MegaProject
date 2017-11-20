@@ -8,7 +8,7 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using SocketIO;
 
-public class PlayerStatus : MonoBehaviour {
+public class PlayerStatus : NetworkBehaviour {
     private JsonData attr;
     private PlayerHealthManager playerHealth;
 
@@ -102,6 +102,10 @@ public class PlayerStatus : MonoBehaviour {
 
     public void GET_ATTR(SocketIOEvent e)
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
         Debug.Log("[SocketIO] Open received Attr: " + e.data.GetField("attr").ToString());
 
         attr = JsonMapper.ToObject(e.data.GetField("attr").ToString());

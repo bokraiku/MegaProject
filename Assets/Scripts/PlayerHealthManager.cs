@@ -16,6 +16,9 @@ public class PlayerHealthManager : NetworkBehaviour {
     [SyncVar(hook = "OnHealthChanged")]
     private float HealthAmount;
 
+    [SyncVar(hook = "OnDamageHit")]
+    private float DamageHit;
+
     public PlayerStatus playerStatus;
 
     public AudioClip[] m_audio;
@@ -50,11 +53,18 @@ public class PlayerHealthManager : NetworkBehaviour {
 
     }
 
+    [Client]
+    public void CmdShowTextDamage(float Damage)
+    {
+        FloatingController.CreateFloatingText(Damage.ToString(), damageSpawn.transform);
+    }
     public void TakeDamage(float Damage)
     {
-        HealthAmount -= Damage;
-        Debug.Log("Take Damage : " + Damage);
-        FloatingController.CreateFloatingText(Damage.ToString(), damageSpawn.transform);
+        DamageHit = Damage;
+        HealthAmount -= DamageHit;
+        Debug.Log("Take Damage : " + DamageHit);
+        //CmdShowTextDamage(Damage);
+        //FloatingController.CreateFloatingText(Damage.ToString(), damageSpawn.transform);
         //if (isLocalPlayer)
         //{
         //    if (HealthAmount > 0)
@@ -88,8 +98,15 @@ public class PlayerHealthManager : NetworkBehaviour {
     }
     void OnHealthChanged(float hlth)
     {
+        
         HealthAmount = hlth;
         SetHealthText();
+        FloatingController.CreateFloatingText(DamageHit.ToString(), damageSpawn.transform);
+        DamageHit = 0;
+    }
+    void OnDamageHit(float damage)
+    {
+        DamageHit = damage;
     }
 
     private void Death()

@@ -23,6 +23,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public bool is_attack = false;
         [SerializeField] GameObject hit;
 
+        [SyncVar]
+        private float damage;
+
         public GameObject[] cooldown;
 
         public AudioSource m_audio;
@@ -482,6 +485,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void LunchAttack(Collider col)
         {
+            if (!isLocalPlayer)
+            {
+                return;
+            }
             // MOnster
             Collider[] cols = Physics.OverlapBox(col.bounds.center, col.bounds.extents, col.transform.rotation, LayerMask.GetMask("HitBox"));
             //Debug.Log(cols.Length);
@@ -513,8 +520,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 Debug.Log("Found Player" + c.transform.name);
                 string uniqueID = c.transform.name;
                 //Debug.Log("Found Player" + uniqueID);
-                float damage = Mathf.Floor(Random.Range(playerStatus.P_ATTACK, playerStatus.P_ATTACK));
+                damage = Mathf.Floor(Random.Range(playerStatus.P_ATTACK, playerStatus.P_ATTACK));
+
                 CmdTellServerWhoWasAttack(uniqueID, damage);
+               
                 //c.transform.GetComponent<Enemy>().TakeDamage(damate);
                 //c.SendMessageUpwards("TakeDamage", damate);
             }
@@ -617,6 +626,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         [Command]
         void CmdTellServerMonsterWasAttack(string uniqueID,float damage)
         {
+          
             GameObject go = GameObject.Find(uniqueID);
             go.GetComponent<Enemy>().TakeDamage(damage);
         }
@@ -624,12 +634,18 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         [Command]
         void CmdTellServerWhoWasAttack(string uniqueID, float damage)
         {
+
+            Debug.Log("Send Attack to Server : " + uniqueID);
             GameObject go = GameObject.Find(uniqueID);
             go.GetComponent<PlayerHealthManager>().TakeDamage(damage);
+            
+
         }
+
 
         public void EnableMarker()
         {
+
             PlayEffect();
             this.Marker.SetActive(true);
             float maxvol = Mathf.Floor(Random.Range(1f, 2.5f));
