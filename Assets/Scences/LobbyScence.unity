@@ -2035,18 +2035,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8ac31de7cce51b44b56aec26202438b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldZone:
-  - {fileID: 1057498115}
-  - {fileID: 2067019862}
-  worldObject:
-  - {fileID: 1522864586}
-  - {fileID: 1146100302}
-  warpZone:
-  - {fileID: 1467083844}
-  - {fileID: 89253750}
-  spawnPoint:
-  - {fileID: 529358425}
-  - {fileID: 1952507072}
+  worldZone: []
+  worldObject: []
+  warpZone: []
+  spawnPoint: []
   LocalPlayerCurrentZone: {fileID: 0}
 --- !u!4 &129400841
 Transform:
@@ -14861,7 +14853,7 @@ Prefab:
     - target: {fileID: 114017920515779240, guid: cf67cc67328982647945332a349cbedb,
         type: 2}
       propertyPath: numberOfEnemies
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cf67cc67328982647945332a349cbedb, type: 2}
@@ -31392,8 +31384,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraMoveSpeed: 120
   CameraFollowObj: {fileID: 0}
-  clamAngle: 80
-  InputSensitivity: 150
+  clamAngle: 30
+  InputSensitivity: 100
   CameraObj: {fileID: 0}
   PlayerObj: {fileID: 0}
   camDistanceXtoPlayer: 0
@@ -32141,7 +32133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenuImage: {fileID: 0}
-  amin: {fileID: 2037971915}
+  amin: {fileID: 0}
 --- !u!95 &2093264870
 Animator:
   serializedVersion: 3

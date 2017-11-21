@@ -56,7 +56,7 @@ public class Enemy : NetworkBehaviour {
     }
     void Start () {
 
-        DiableMarker();
+        
         FloatingController.Initialize();
         //damageSpawn = GameObject.Find("DamageSpawn");
         anim = GetComponent<Animator>();
@@ -374,12 +374,12 @@ public class Enemy : NetworkBehaviour {
         return damage;
     }
 
-    public void EnableMarker()
-    {
-        this.AttackMarker.SetActive(true);
-    }
-    public void DiableMarker()
-    {
-        this.AttackMarker.SetActive(false);
-    }
+    //public void EnableMarker()
+    //{
+    //    this.AttackMarker.SetActive(true);
+    //}
+    //public void DiableMarker()
+    //{
+    //    this.AttackMarker.SetActive(false);
+    //}
 }
