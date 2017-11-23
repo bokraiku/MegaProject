@@ -27,17 +27,20 @@ public class PlayerHealthManager : NetworkBehaviour {
     public bool isDead = false;
 
     public UIManager uiManager;
+    [SyncVar]
+    private Text HealthText;
 
-    
 
-	// Use this for initialization
-	void Start () {
+    public override void OnStartLocalPlayer()
+    {
         m_source = GetComponent<AudioSource>();
         m_anim = GetComponent<Animator>();
-
         PlayerHealth = GameObject.FindWithTag("HealthBar").GetComponent<Image>();
 
+        HealthText = GameObject.FindWithTag("HealthBar").gameObject.transform.Find("HP").GetComponent<Text>();
+        SetHealthText();
     }
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -49,6 +52,7 @@ public class PlayerHealthManager : NetworkBehaviour {
         {
             this.MaxHealth = health;
             this.HealthAmount = this.MaxHealth;
+            HealthText.GetComponent<Text>().text = this.HealthAmount.ToString();
         }
 
     }
@@ -58,11 +62,14 @@ public class PlayerHealthManager : NetworkBehaviour {
     {
         FloatingController.CreateFloatingText(Damage.ToString(), damageSpawn.transform);
     }
+
     public void TakeDamage(float Damage)
     {
         DamageHit = Damage;
         HealthAmount -= DamageHit;
         Debug.Log("Take Damage : " + DamageHit);
+        HealthText.GetComponent<Text>().text = this.HealthAmount.ToString();
+        Debug.Log("Max health : " + MaxHealth);
         //CmdShowTextDamage(Damage);
         //FloatingController.CreateFloatingText(Damage.ToString(), damageSpawn.transform);
         //if (isLocalPlayer)

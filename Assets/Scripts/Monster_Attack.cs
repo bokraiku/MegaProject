@@ -9,7 +9,7 @@ public class Monster_Attack : NetworkBehaviour
     private GameObject AttackMarker;
 
     private float currentDistance;
-    private float minDistance = 2.3f;
+    private float minDistance = 2f;
     private float nextAttack;
     private float attackRate = 3f;
     private Transform myTransform;
@@ -37,18 +37,11 @@ public class Monster_Attack : NetworkBehaviour
         if (targetScript.targetTransform != null)
         {
             currentDistance = Vector3.Distance(targetScript.targetTransform.position , myTransform.position);
-
-            Debug.Log("Distance : " + (currentDistance < minDistance) + "|Value : " + currentDistance);
-            Debug.Log("Time :" + (Time.time > nextAttack));
             if (currentDistance < minDistance && Time.time > nextAttack)
             {
                 nextAttack = Time.time + attackRate;
                 agent.isStopped = true;
                 agent.ResetPath();
-                //anim.SetBool("IsWalk", false);
-                //anim.SetTrigger("IsAttack");
-
-                //GetComponent<NetworkAnimator>().SetTrigger("IsAttack");
                 Debug.Log("Target MOnster: " + targetScript.targetTransform.transform.name);
 
 
@@ -56,6 +49,11 @@ public class Monster_Attack : NetworkBehaviour
                 //RpcMonsterPlayAnimation();
                 //MonsterAttack();
                 RpcLunchAttack();
+            }
+
+            if(minDistance > currentDistance)
+            {
+                //targetScript.targetTransform = null;
             }
 
         }
