@@ -14853,7 +14853,7 @@ Prefab:
     - target: {fileID: 114017920515779240, guid: cf67cc67328982647945332a349cbedb,
         type: 2}
       propertyPath: numberOfEnemies
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cf67cc67328982647945332a349cbedb, type: 2}

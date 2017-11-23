@@ -494,7 +494,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             //Debug.Log(cols.Length);
             
             foreach(Collider c in cols){
-                if (c.transform.root == transform)
+                if (c.transform.root == transform || c.transform.name == "AttackMarker")
                 {
                     continue;
                 }
@@ -628,6 +628,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
           
             GameObject go = GameObject.Find(uniqueID);
+            Debug.Log("Monster found : " + uniqueID);
             go.GetComponent<Enemy>().TakeDamage(damage);
         }
 

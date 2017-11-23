@@ -17,7 +17,8 @@ public class Enemy : NetworkBehaviour {
 
     public Image HealthBar;
 
-    private float maxHp = 50000f;
+    [SyncVar (hook = "OnHealthChange")]
+    private float maxHp = 5000f;
     private float amountHp;
 
     private bool noTarget = false;
@@ -253,45 +254,20 @@ public class Enemy : NetworkBehaviour {
     }
 
 
-    // Update is called once per frame
-    void Update () {
-        
-        
-        //this.ManageAttack();
-        ////FloatingController.CreateFloatingText("1244", transform);
-        //Player = GameObject.FindWithTag("Player").GetComponent<Transform>();
-        //if (Player != null && Vector3.Distance(Player.position,this.transform.position) < 10 && noTarget == false)
-        //{
-        //    Vector3 direction = Player.position - this.transform.position;
-        //    direction.y = 0;
-        //    this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
-        //    if(direction.magnitude > 2f)
-        //    {
-  
-        //        anim.SetBool("IsWalk", true);
-        //        this.transform.Translate(0, 0, 0.05f);
-        //    }
-        //    else
-        //    {
-        //        if (attackTime == 0)
-        //        {
-        //            GetComponent<NetworkAnimator>().SetTrigger("IsAttack");
-        //            attackTime = attackCooldown;
-        //        }
-               
-        //        anim.SetBool("IsWalk", false);
-        //    }
-        //}
-        //else
-        //{
-        //    //anim.SetBool("IsAttack", false);
-        //    anim.SetBool("IsWalk", false);
-        //}
-    }
-    void OnMouseDown()
+    void OnHealthChange(float health)
     {
-        //Debug.Log("ok");
+        amountHp = health;
+        float fill = (1 / maxHp) * amountHp;
+        HealthBar.fillAmount = fill;
+    }
+
+    [ClientRpc]
+    void RpcMonsterShowDamage(float damage)
+    {
         
+        float fill = (1 / maxHp) * amountHp;
+        HealthBar.fillAmount = fill;
+        FloatingController.CreateFloatingText(damage.ToString(), damageSpawn.transform);
     }
     void ManageAttack()
     {
@@ -333,18 +309,18 @@ public class Enemy : NetworkBehaviour {
         //GetComponent<NetworkAnimator>().SetTrigger("Hit");
 
         amountHp -= damage;
-        float fill = (1 / maxHp) * amountHp;
-        HealthBar.fillAmount = fill;
-        Debug.Log(fill);
-        FloatingController.CreateFloatingText(damage.ToString(), damageSpawn.transform);
-        if(amountHp <= 0)
+       
+        //Debug.Log(fill);
+        //FloatingController.CreateFloatingText(damage.ToString(), damageSpawn.transform);
+        RpcMonsterShowDamage(damage);
+        if (amountHp <= 0)
         {
-            GetComponent<NetworkAnimator>().SetTrigger("IsDeath");
-            //anim.SetTrigger("IsDeath");
-            gameObject.layer = 1;
-            gameObject.GetComponent<Collider>().isTrigger = true;
-            gameObject.GetComponent<Enemy>().enabled = false;
-            GameObject.Destroy(gameObject, 2f);
+            //GetComponent<NetworkAnimator>().SetTrigger("IsDeath");
+            ////anim.SetTrigger("IsDeath");
+            //gameObject.layer = 1;
+            //gameObject.GetComponent<Collider>().isTrigger = true;
+            //gameObject.GetComponent<Enemy>().enabled = false;
+            //GameObject.Destroy(gameObject, 2f);
         }
     }
     public void WalkLeftStep()
