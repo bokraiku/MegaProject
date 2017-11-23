@@ -42,6 +42,7 @@ public class Monster_Attack : NetworkBehaviour
                 nextAttack = Time.time + attackRate;
                 agent.isStopped = true;
                 agent.ResetPath();
+
                 Debug.Log("Target MOnster: " + targetScript.targetTransform.transform.name);
 
 

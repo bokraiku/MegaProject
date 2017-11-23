@@ -4,22 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
+using SocketIO;
 
 public class PlayerHealthManager : NetworkBehaviour {
 
     public Image PlayerHealth;
     public GameObject damageSpawn;
 
-    [SyncVar]
+    
     private float MaxHealth;
 
     [SyncVar(hook = "OnHealthChanged")]
-    private float HealthAmount;
+    private float HealthAmount = 8000;
 
     [SyncVar(hook = "OnDamageHit")]
     private float DamageHit;
 
-    public PlayerStatus playerStatus;
+   
 
     public AudioClip[] m_audio;
     public AudioSource m_source;
@@ -27,35 +28,29 @@ public class PlayerHealthManager : NetworkBehaviour {
     public bool isDead = false;
 
     public UIManager uiManager;
-    [SyncVar]
     private Text HealthText;
+
+    private PlayerStatus playerStatus;
 
 
     public override void OnStartLocalPlayer()
     {
         m_source = GetComponent<AudioSource>();
         m_anim = GetComponent<Animator>();
+        playerStatus = GetComponent<PlayerStatus>();
         PlayerHealth = GameObject.FindWithTag("HealthBar").GetComponent<Image>();
 
         HealthText = GameObject.FindWithTag("HealthBar").gameObject.transform.Find("HP").GetComponent<Text>();
+        //HealthAmount = playerStatus.HEALTH;
         SetHealthText();
     }
 
 	
 	// Update is called once per frame
 	void Update () {
-        //Debug.Log("Health : "  +this.MaxHealth);
+        Debug.Log("Health : "  + HealthAmount);
 	}
-    public void SetHealth(int health)
-    {
-        if (isLocalPlayer)
-        {
-            this.MaxHealth = health;
-            this.HealthAmount = this.MaxHealth;
-            HealthText.GetComponent<Text>().text = this.HealthAmount.ToString();
-        }
 
-    }
 
     [Client]
     public void CmdShowTextDamage(float Damage)
@@ -67,9 +62,8 @@ public class PlayerHealthManager : NetworkBehaviour {
     {
         DamageHit = Damage;
         HealthAmount -= DamageHit;
-        Debug.Log("Take Damage : " + DamageHit);
-        HealthText.GetComponent<Text>().text = this.HealthAmount.ToString();
-        Debug.Log("Max health : " + MaxHealth);
+        Debug.Log("Health Amount : " + HealthAmount);
+        
         //CmdShowTextDamage(Damage);
         //FloatingController.CreateFloatingText(Damage.ToString(), damageSpawn.transform);
         //if (isLocalPlayer)
@@ -94,13 +88,34 @@ public class PlayerHealthManager : NetworkBehaviour {
         //}
 
     }
+
+
+
+    public void SetHealth(int health)
+    {
+        MaxHealth = health;
+        HealthAmount = health;
+        SetHealthText();
+        /*
+        if (isLocalPlayer)
+        {
+           
+            //float fill = (1 / MaxHealth) * HealthAmount;
+            //PlayerHealth.fillAmount = fill;
+            //HealthText.text = HealthAmount.ToString();
+            SetHealthText();
+        }
+        */
+
+    }
     void SetHealthText() {
         if (isLocalPlayer)
         {
-
             float fill = (1 / MaxHealth) * HealthAmount;
             PlayerHealth.fillAmount = fill;
-            
+            HealthText.text = HealthAmount.ToString();
+            Debug.Log("Max health : " + MaxHealth + "|Health Amount : " + HealthAmount);
+
         }
     }
     void OnHealthChanged(float hlth)
@@ -111,6 +126,9 @@ public class PlayerHealthManager : NetworkBehaviour {
         
        
     }
+
+
+
     void OnDamageHit(float damage)
     {
         DamageHit = damage;

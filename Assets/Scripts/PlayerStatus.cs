@@ -31,12 +31,12 @@ public class PlayerStatus : NetworkBehaviour {
 
     public string ATTACK_TYPE  { get; set; }
 
-    private void Start()
+    public override void OnStartLocalPlayer()
     {
         GameObject go = GameObject.Find("SocketIO");
         socket = go.GetComponent<SocketIOComponent>();
 
-        playerHealth  = gameObject.GetComponent<PlayerHealthManager>();
+        playerHealth  = GetComponent<PlayerHealthManager>();
 
         socket.On("player_attr_received", GET_ATTR);
         StartCoroutine("WaitForData");
@@ -117,9 +117,20 @@ public class PlayerStatus : NetworkBehaviour {
             this.setStatus((int)attr[0]["str"], (int)attr[0]["vit"], (int)attr[0]["dex"], (int)attr[0]["_int"], (int)attr[0]["hp"], (int)attr[0]["agi"]);
 
             playerHealth.SetHealth(this.HEALTH);
+            //CmdSetPlayerHealth();
             Debug.Log("Attack is : " + this.P_ATTACK);
             Debug.Log("Health is : " + this.HEALTH);
         }
+    }
+    void setPlayerHealth()
+    {
+        CmdSetPlayerHealth();
+    }
+
+    [Command]
+    void CmdSetPlayerHealth()
+    {
+        playerHealth.SetHealth(this.HEALTH);
     }
 
 
