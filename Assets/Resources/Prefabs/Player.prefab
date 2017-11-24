@@ -6983,7 +6983,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 1280
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -7356,13 +7356,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerHealth: {fileID: 0}
   damageSpawn: {fileID: 1895158591433250}
-  playerStatus: {fileID: 0}
+  isDead: 0
   m_audio:
   - {fileID: 8300000, guid: b34c13faf0d5c684dac91f2eea770de4, type: 3}
   - {fileID: 8300000, guid: df908b9bee6c55a42a30956d4107db5a, type: 3}
   m_source: {fileID: 0}
   m_anim: {fileID: 0}
-  isDead: 0
   uiManager: {fileID: 0}
 --- !u!114 &114866595644387918
 MonoBehaviour:

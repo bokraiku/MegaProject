@@ -17,9 +17,13 @@ public class Enemy : NetworkBehaviour {
 
     public Image HealthBar;
 
-    [SyncVar (hook = "OnHealthChange")]
-    private float maxHp = 5000f;
+    
+    private float maxHp = 500f;
+
+    [SyncVar(hook = "OnHealthChange")]
     private float amountHp;
+
+    private bool isDeath = false;
 
     private bool noTarget = false;
 
@@ -242,15 +246,19 @@ public class Enemy : NetworkBehaviour {
 
     IEnumerator DoCheck()
     {
-        for (;;)
+        if (!isDeath)
         {
-            SearchTarget();
-            MoveToTarget();
-            ReturnToOri();
-            CheckOri();
-            PlayAnimationMove();
-            yield return new WaitForSeconds(0.2f);
+            for (;;)
+            {
+                SearchTarget();
+                MoveToTarget();
+                ReturnToOri();
+                CheckOri();
+                PlayAnimationMove();
+                yield return new WaitForSeconds(0.2f);
+            }
         }
+        
     }
 
 
@@ -259,12 +267,12 @@ public class Enemy : NetworkBehaviour {
         amountHp = health;
         float fill = (1 / maxHp) * amountHp;
         HealthBar.fillAmount = fill;
+        
     }
 
     [ClientRpc]
     void RpcMonsterShowDamage(float damage)
     {
-        
         float fill = (1 / maxHp) * amountHp;
         HealthBar.fillAmount = fill;
         FloatingController.CreateFloatingText(damage.ToString(), damageSpawn.transform);
@@ -316,11 +324,20 @@ public class Enemy : NetworkBehaviour {
         if (amountHp <= 0)
         {
             //GetComponent<NetworkAnimator>().SetTrigger("IsDeath");
-            ////anim.SetTrigger("IsDeath");
-            //gameObject.layer = 1;
-            //gameObject.GetComponent<Collider>().isTrigger = true;
-            //gameObject.GetComponent<Enemy>().enabled = false;
-            //GameObject.Destroy(gameObject, 2f);
+            isDeath = true;
+            anim.SetTrigger("IsDeath");
+            agent.isStopped = true;
+            agent.ResetPath();
+            targetTransform = null;
+            
+
+            
+            
+            gameObject.layer = 1;
+            gameObject.GetComponent<Enemy>().enabled = false;
+            GameObject.Destroy(gameObject, 1f);
+            
+            //transform.position = Vector3.zero;
         }
     }
     public void WalkLeftStep()

@@ -132,22 +132,25 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                         GameManagement.instane.LocalPlayerCurrentZone = currentGameobject;
                         if (currentGameobject.name != "g_z1_bound")
                         {
-                            //SkillPanel.SetActive(true);
+                            SkillPanel.SetActive(true);
                         }
                         else
                         {
-                            //SkillPanel.SetActive(false);
+                            SkillPanel.SetActive(false);
                         }
                     }
                     
                     //Debug.Log("Current Game Object  " + currentGameobject.name);
                 }
 
+                
+
                 if (warpMatch.IsMatch(currentGameobject.name.ToString()) && GameManagement.instane != null)
                 {
-                    //Debug.Log("Current Warp  " + currentGameobject.name);
+                    
                     GameObject WarpObject =  GameManagement.instane.ManageWarp(currentGameobject.name);
-                    if(WarpObject != null)
+                    Debug.Log("Current Warp :  " + WarpObject);
+                    if (WarpObject != null)
                     {
                         this.transform.position = WarpObject.transform.position;
                     }

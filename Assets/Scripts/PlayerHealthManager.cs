@@ -20,12 +20,20 @@ public class PlayerHealthManager : NetworkBehaviour {
     [SyncVar(hook = "OnDamageHit")]
     private float DamageHit;
 
-   
+    public delegate void DieDelegate();
+    public event DieDelegate EventDie;
+
+    public delegate void RespawnDelegate();
+    public event RespawnDelegate EventRespawn;
+    private bool shouldDie = false;
+    public bool isDead = false;
+
+
 
     public AudioClip[] m_audio;
     public AudioSource m_source;
     public Animator m_anim;
-    public bool isDead = false;
+    //public bool isDead = false;
 
     public UIManager uiManager;
     private Text HealthText;
@@ -48,9 +56,57 @@ public class PlayerHealthManager : NetworkBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log("Health : "  + HealthAmount);
-	}
+        //CheckCondition();
+        //StartCoroutine(test());
+    }
 
+    IEnumerator test()
+    {
+        yield return new WaitForSeconds(5f);
+        RpcRespawn();
+    }
+
+    [ClientRpc]
+    void RpcRespawn()
+    {
+        if (isLocalPlayer)
+        {
+            // Set the spawn point to origin as a default value
+            //wVector3 spawnPoint = Vector3.zero;
+
+            // If there is a spawn point array and the array is not empty, pick one at random
+            // Set the player’s position to the chosen spawn point
+            transform.position = GameObject.Find("Spawn Points").transform.GetChild(0).transform.position;
+        }
+    }
+
+    void CheckCondition()
+    {
+        if (HealthAmount <= 0 && !shouldDie && !isDead)
+        {
+            shouldDie = true;
+        }
+
+        if (HealthAmount <= 0 && shouldDie)
+        {
+            if (EventDie != null)
+            {
+                EventDie();
+            }
+
+            shouldDie = false;
+        }
+
+        if (HealthAmount > 0 && isDead)
+        {
+            if (EventRespawn != null)
+            {
+                EventRespawn();
+            }
+
+            isDead = false;
+        }
+    }
 
     [Client]
     public void CmdShowTextDamage(float Damage)
@@ -63,7 +119,11 @@ public class PlayerHealthManager : NetworkBehaviour {
         DamageHit = Damage;
         HealthAmount -= DamageHit;
         Debug.Log("Health Amount : " + HealthAmount);
-        
+        if (HealthAmount <= 0)
+        {
+            m_anim.SetTrigger("IsDeath");
+            RpcRespawn();
+        }
         //CmdShowTextDamage(Damage);
         //FloatingController.CreateFloatingText(Damage.ToString(), damageSpawn.transform);
         //if (isLocalPlayer)

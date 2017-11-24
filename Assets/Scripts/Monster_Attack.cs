@@ -99,7 +99,7 @@ public class Monster_Attack : NetworkBehaviour
     public float Attack()
     {
 
-        float damage = Mathf.Floor(Random.Range(10, 50));
+        float damage = Mathf.Floor(Random.Range(2000, 5000));
         return damage;
     }
 
