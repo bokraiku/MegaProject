@@ -55,8 +55,12 @@ public class Monster_Attack : NetworkBehaviour
 
                 //RpcMonsterPlayAnimation();
                 //MonsterAttack();
-                MonsterAttack(); // for host player
-                RpcLunchAttack();
+                if(targetScript.targetTransform.transform.GetComponent<PlayerHealthManager>().isDead == false)
+                {
+                    MonsterAttack(); // for host player
+                    RpcLunchAttack();
+                }
+
                
                 //myTransform.position = Vector3.MoveTowards(myTransform.position, targetScript.targetTransform.position, 0.2f);
                 //agent.destination = targetScript.targetTransform.position;
@@ -107,7 +111,7 @@ public class Monster_Attack : NetworkBehaviour
     {
         this.AttackMarker.SetActive(true);
         //Collider col = AttackMarker.GetComponent<Collider>();
-        if (targetScript.targetTransform != null)
+        if (targetScript.targetTransform != null && targetScript.targetTransform.transform.GetComponent<PlayerHealthManager>().isDead == false)
         {
             targetScript.targetTransform.transform.GetComponent<PlayerHealthManager>().TakeDamage(this.Attack());
             

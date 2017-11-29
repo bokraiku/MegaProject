@@ -26,12 +26,16 @@ public class PlayerHealthManager : NetworkBehaviour {
     public delegate void RespawnDelegate();
     public event RespawnDelegate EventRespawn;
     private bool shouldDie = false;
+
+    [SyncVar]
     public bool isDead = false;
 
 
 
     public AudioClip[] m_audio;
     public AudioSource m_source;
+
+    
     public Animator m_anim;
     //public bool isDead = false;
 
@@ -40,11 +44,14 @@ public class PlayerHealthManager : NetworkBehaviour {
 
     private PlayerStatus playerStatus;
 
-
+    void Start()
+    {
+        m_anim = GetComponent<Animator>();
+    }
     public override void OnStartLocalPlayer()
     {
         m_source = GetComponent<AudioSource>();
-        m_anim = GetComponent<Animator>();
+       
         playerStatus = GetComponent<PlayerStatus>();
         PlayerHealth = GameObject.FindWithTag("HealthBar").GetComponent<Image>();
 
@@ -116,14 +123,23 @@ public class PlayerHealthManager : NetworkBehaviour {
 
     public void TakeDamage(float Damage)
     {
-        DamageHit = Damage;
-        HealthAmount -= DamageHit;
-        Debug.Log("Health Amount : " + HealthAmount);
-        if (HealthAmount <= 0)
+        if (!isDead)
         {
-            m_anim.SetTrigger("IsDeath");
-            RpcRespawn();
+            DamageHit = Damage;
+            HealthAmount -= DamageHit;
+            Debug.Log("Health Amount : " + HealthAmount);
+
+            if (HealthAmount <= 0)
+            {
+
+                isDead = true;
+                HealthAmount = 0;
+                m_anim.SetTrigger("IsDeath");
+                StartCoroutine(test());
+                RpcRespawn();
+            }
         }
+        
         //CmdShowTextDamage(Damage);
         //FloatingController.CreateFloatingText(Damage.ToString(), damageSpawn.transform);
         //if (isLocalPlayer)
@@ -177,6 +193,11 @@ public class PlayerHealthManager : NetworkBehaviour {
             Debug.Log("Max health : " + MaxHealth + "|Health Amount : " + HealthAmount);
 
         }
+    }
+
+    public void ResetHealth()
+    {
+        HealthAmount = MaxHealth;
     }
     void OnHealthChanged(float hlth)
     {
